@@ -1,0 +1,64 @@
+1. Cosa devi fare per usare il modulo HTTP?
+
+Per usare il modulo HTTP bisogna importare le giuste librerie da "@angular/common/http" in questo caso importiamo la
+libreria "HttpClientModule".
+____________________________________________________________________________________________________________________
+
+2. Prendendo in considerazione il componente Foo descrivi a cosa servono i seguenti attributi:
+   a. data
+   b. loading
+   c. o
+
+L'attributo "data" conterra il risultato della nostra chiamata HTTP, l'attributo "loading" è una variabile booleana
+che ci dice che siamo in attesa di una risposta dal server mentre l'atttibuto "o" è un oggetto (Observable) che ci notifica
+quando il server ci arriva la risposta HTTP dal server.
+____________________________________________________________________________________________________________________
+
+3. Come si usa l’oggetto HttpClient ? Descrivi
+   - Come si importa
+   - Come viene passato al componente tramite la dependency injection
+
+L'oggetto HTTPClient si importa definendo una variabile come Public all'interno del costruttore in modo che essa si definisca
+automaticamente (ES. constructor(public http: HttpClient) {}) ed usiamo la dependecy injection per dire ad angular di passarci
+il modulo HTTP quando crea l'istanza del nostro componente "foo".
+____________________________________________________________________________________________________________________
+
+4. Spiega la differenza tra queste due notazioni:
+   a. constructor(public http: HttpClient) {}
+
+   b. // other instance variables here
+      http: HttpClient;
+      constructor(http: HttpClient) {
+      this.http = http;
+      }
+
+Nella notazione a l'ggetto HTTPClient viene definito come public e quindi non ha bisogno di essere dichiarato prima del costruttore
+come una variabile normale, nella seconda notazione invece dichiariamo l'oggetto HTTPClient come variabile prima del costruttore e
+quindi non è necessario aggiungere la notazione Public prima che essa venga dichiarata. Sono due modi alternarivi per fare la stessa cosa.
+____________________________________________________________________________________________________________________
+
+5. Come si ottiene un oggetto observable che riceverà i dati da una get http?
+
+Dichiariamo un oggetto o di tipo Observable (ES. o :Observable<Object>;), successivamente all'interno di un metodo facciamo la get e otteniamo
+l'oggetto observable che attende la risposta (ES: this.o = this.http.get('https://jsonplaceholder.typicode.com/posts/1')) e attacchiamo all'oggetto
+observable un metodo "observer" che verrà lanciato quando arriva la risposta (ES. this.o.subscribe(this.getData);).
+____________________________________________________________________________________________________________________
+
+6. Come si “sottoscrive” un metodo che gestisca i dati ricevuti dall’oggetto observable descritto nella domanda precedente?
+
+Attacchiamo all'oggetto observable un metodo "observer" che verrà lanciato quando arriva la risposta (ES. this.o.subscribe(this.getData);).
+____________________________________________________________________________________________________________________
+
+7. Commenta ogni riga del metodo getData
+   a. getData = (d : Object) =>
+   b. {
+   c.    this.data = new Object(d);
+   d.    this.loading = false;
+   e. }
+
+a. Crea un metodo chiamato getData e gli passa un oggetto di tipo Object chiamato d
+b. Apriamo il metodo
+c. Inseriamo dentro la nostra variabile data il risultato della chiamata HTTP che in questo caso sarà l'oggetto d.
+d. Instanziamo la variabile booleana a false in modo che grazie all' *ngIf diventi invisibile.
+e. Chiudiamo il metodo
+
